@@ -11,15 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
+
+        Schema::create("Company", function (Blueprint $table) {
+            $table->id();
+            $table->string('Name_Company');
+            $table->string('Cnpj_Company');
+            $table->integer('Phone_Company');
+            $table->timestamps();
+        });
         Schema::create('User', function (Blueprint $table) {
-            $table->id('Id_User')->primary();
+            $table->id();
             $table->string('First_Name');
             $table->string('Last_Name');
             $table->string('Email')->unique();
             $table->string('Password');
             $table->boolean('Status');
-            $table->foreignId('Id_Company')
-            ->constrained('Company','Id_Company');
+            $table->foreignId('Id_Company')->constrained('Company')->onDelete('cascade');
             $table->timestamps();
         });
 
@@ -37,6 +44,22 @@ return new class extends Migration
             $table->longText('payload');
             $table->integer('last_activity')->index();
         });
+        Schema::create('Type_Access', function (Blueprint $table) { 
+            $table->id();
+            $table->string('Name_Type_Access');
+        });
+        Schema::create('Type_User', function (Blueprint $table) {
+            $table->unsignedBigInteger('Id_User');
+            $table->unsignedBigInteger('Id_Type_Access');
+        
+            // Define uma chave primária composta
+            $table->primary(['Id_User', 'Id_Type_Access']);
+        
+            // Define as chaves estrangeiras
+            $table->foreign('Id_User')->references('id')->on('User')->onDelete('cascade');
+            $table->foreign('Id_Type_Access')->references('id')->on('Type_Access')->onDelete('cascade');
+        
+        });
     }
 
     /**
@@ -44,8 +67,11 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('Company');
         Schema::dropIfExists('User');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
+        Schema::dropIfExists('Type_Access');
+        Schema::dropIfExists('Type_User');
     }
 };
