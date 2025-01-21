@@ -21,9 +21,10 @@ return new class extends Migration
         });
         Schema::create('Item_Sale', function (Blueprint $table) {
             $table->id();
-            $table->string('Discount_Sale');
-            $table->date('Date_Sale');
-           $table->foreignId('Id_Client')->constrained('Client');
+            $table->foreignId('Cod_Product')->constrained('Product','Cod_Product');
+            $table->string('Name_Item_Sale');
+            $table->unsignedInteger('Amount_Item');
+            $table->decimal('Unit_Value',8,2);
             $table->timestamps();
         });
     }
