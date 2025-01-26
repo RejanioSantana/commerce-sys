@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('Discount_Sale');
             $table->date('Date_Sale');
-            $table->foreignId('Id_User')->constrained('User');
+            $table->foreignId('Id_User')->constrained('users');
             $table->foreignId('Id_Client')->constrained('Client');
             $table->timestamps();
         });

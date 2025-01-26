@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('Note_Cash_Book');
             $table->boolean('Type_Cash_Book');
             $table->decimal('Value_Cash_Book',8,2);
-            $table->foreignId('Id_User')->constrained('User');
+            $table->foreignId('Id_User')->constrained('users');
             $table->foreignId('Id_Cash')->constrained('Cash')->onDelete('cascade');
             $table->foreignId('Id_Client')->constrained('Client');
             $table->timestamps();

@@ -16,15 +16,16 @@ return new class extends Migration
             $table->id();
             $table->string('Name_Company');
             $table->string('Cnpj_Company');
-            $table->integer('Phone_Company');
+            $table->bigInteger('Phone_Company');
             $table->timestamps();
         });
-        Schema::create('User', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('First_Name');
             $table->string('Last_Name');
             $table->string('Email')->unique();
-            $table->string('Password');
+            $table->unsignedInteger('User_Code')->unique();
+            $table->string('password');
             $table->boolean('Status');
             $table->foreignId('Id_Company')->constrained('Company')->onDelete('cascade');
             $table->timestamps();
@@ -56,7 +57,7 @@ return new class extends Migration
             $table->primary(['Id_User', 'Id_Type_Access']);
         
             // Define as chaves estrangeiras
-            $table->foreign('Id_User')->references('id')->on('User')->onDelete('cascade');
+            $table->foreign('Id_User')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('Id_Type_Access')->references('id')->on('Type_Access')->onDelete('cascade');
         
         });
@@ -68,7 +69,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('Company');
-        Schema::dropIfExists('User');
+        Schema::dropIfExists('users');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
         Schema::dropIfExists('Type_Access');
