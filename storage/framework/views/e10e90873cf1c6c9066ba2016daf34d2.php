@@ -30,12 +30,12 @@
                 <li>
                     <a href="#"><i class="fa fa-circle-o"></i> <span class="nav-label">Estoque</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
-                        <li><a href="#">Pesquisar Produto</a></li>
-                        <li><a href="<?php echo e(route('product')); ?>">Novo Produto</a></li>
+                        <li><a href="<?php echo e(route('product')); ?>">Produtos</a></li>
+                        <li><a href="<?php echo e(route('product.create')); ?>">Novo Produto</a></li>
                         <li><a href="#">Devolução</a></li>
                         <li><a href="#">Status</a></li>
                         <li><a href="#">Relatorio</a></li>
-                        <li><a href="#">Categorias</a></li>
+                        <li><a href="<?php echo e(route('category')); ?>">Categorias</a></li>
                         <li><a href="<?php echo e(route('unit')); ?>">Unidades</a></li>
                     </ul>
                 </li>

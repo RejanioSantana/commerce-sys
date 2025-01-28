@@ -7,18 +7,19 @@
                             <div class="modal inmodal fade" id="myModal6" tabindex="-1" role="dialog"  aria-hidden="true">
                                 <div class="modal-dialog modal-sm">
                                     <div class="modal-content">
-                                        <form action="#" method="post" class="form-horizontal">
+                                        <form action="<?php echo e(route('unit')); ?>" method="post" class="form-horizontal">
+                                        <?php echo csrf_field(); ?>
                                         <div class="modal-header">
                                             <h4 class="modal-title">Nova Unidade</h4>
                                         </div>
                                         <div class="modal-body">
                                                     <div class="form-group">
                                                         <label for=""class="col-sm-1 control-label" >Nome</label>
-                                                        <input type="text" class="form-control col-sm-10" maxlength="20">
+                                                        <input type="text" class="form-control col-sm-10" name="name" maxlength="20">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for=""class="col-sm-1 control-label" >Abreviação</label>
-                                                        <input type="text" class="form-control" maxlength="3">
+                                                        <input type="text" class="form-control" name="shortname" maxlength="3">
                                                     </div>
                                                 
                                                 </div>
@@ -54,35 +55,23 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
-                                        <td>Project<small>This is example of project</small></td>
-                                        <td><span class="pie">0.52/1.561</span></td>
-                                        <td><a href="#"><i class="fa fa-times text-danger"></i></a></td>
+                                        <td><?php echo e($index->Name_Unit_Type); ?></td>
+                                        <td><?php echo e($index->Short_Name); ?></td>
+                                        <td><a href="<?php echo e(route('unit.destroy',$index->id)); ?>"><i class="fa fa-times text-danger demo3"></i></a></td>
                                     </tr>
-                                    <tr>
-                                       <td>Alpha project</td>
-                                        <td><span class="pie">6,9</span></td>
-                                        <td><a href="#"><i class="fa fa-times text-danger"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                       <td>Betha project</td>
-                                        <td><span class="pie">3,1</span></td>
-                                        <td><a href="#"><i class="fa fa-times text-danger"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                       <td>Gamma project</td>
-                                        <td><span class="pie">4,9</span></td>
-                                        <td><a href="#"><i class="fa fa-times text-danger"></i></a></td>
-                                    </tr>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    
                                     </tbody>
                                 </table>
                             </div>
-
                         </div>
                     </div>
                 </div>
 
             </div>
+            
 
 <?php $__env->stopSection(); ?>
 

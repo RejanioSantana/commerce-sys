@@ -14,6 +14,9 @@
     <link href="assets/css/animate.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
 
+    <!-- Sweet Alert -->
+    <link href="assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+
 </head>
 
 <body class="fixed-navigation">
@@ -83,8 +86,24 @@
     <!-- ChartJS-->
     <script src="assets/js/plugins/chartJs/Chart.min.js"></script>
 
+    <!-- Sweet alert -->
+    <script src="assets/js/plugins/sweetalert/sweetalert.min.js"></script>
+
     <script>
         $(document).ready(function() {
+            $('.demo3').click(function () {
+            swal({
+                title: "Are you sure?",
+                text: "You will not be able to recover this imaginary file!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, delete it!",
+                closeOnConfirm: false
+            }, function () {
+                swal("Deleted!", "Your imaginary file has been deleted.", "success");
+            });
+        });
 
             var lineData = {
                 labels: ["January", "February", "March", "April", "May", "June", "July"],
@@ -132,8 +151,10 @@
             var ctx = document.getElementById("lineChart").getContext("2d");
             var myNewChart = new Chart(ctx).Line(lineData, lineOptions);
 
+
         });
     </script>
+    
 </body>
 </html>
 <?php /**PATH /home/Rejanio/trampo/material-construcao/app/resources/views/master.blade.php ENDPATH**/ ?>
