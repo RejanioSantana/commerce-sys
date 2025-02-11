@@ -28,7 +28,7 @@
                 </li>
               
                 <li>
-                    <a href="#"><i class="fa fa-circle-o"></i> <span class="nav-label">Estoque</span><span class="fa arrow"></span></a>
+                    <a><i class="fa fa-circle-o"></i> <span class="nav-label">Estoque</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li><a href="{{route('product')}}">Produtos</a></li>
                         <li><a href="{{route('product.create')}}">Novo Produto</a></li>
@@ -41,11 +41,18 @@
                 </li>
 
                 <li>
-                    <a href="#"><i class="fa fa-circle-o"></i> <span class="nav-label">Caixa</span><span class="fa arrow"></span></a>
+                    <a ><i class="fa fa-circle-o"></i> <span class="nav-label">Cliente</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
-                        <li><a href="#">Livro Caixa</a></li>
-                        <li><a href="#">Lançar Receita</a></li>
-                        <li><a href="#">Lançar Despesa</a></li>
+                        <li><a href="#">Novo Cliente</a></li>
+                        <li><a href="{{route('client.index')}}">Todos os Cliente</a></li>
+                   
+                    </ul>
+                </li>
+                <li>
+                    <a><i class="fa fa-circle-o"></i> <span class="nav-label">Caixa</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="{{route('cash.index')}}">Livro Caixa</a></li>
+                        <li><a href="{{route('cash.create')}}">Lançar Receita/Despesa</a></li>
                         <li><a href="#">Gráficos</a></li>
                    
                     </ul>

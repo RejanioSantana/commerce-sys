@@ -35,5 +35,13 @@ class DatabaseSeeder extends Seeder
             "Status"=> 1,
             "Id_Company" => 1,
          ]);
+        DB::table("Client")->insert([
+            "First_Name" => "Padrao",
+            "Last_Name" => "System",
+            "Cpf" => "1",
+            "Email" => "admin@admin.com",
+            "Whatsapp" => 1,
+            "Status"=> 1,
+         ]);
     }
 }

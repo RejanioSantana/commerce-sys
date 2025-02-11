@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('First_Name',11);
             $table->string('Last_Name',40);
-            $table->string('Cpf_Client',11)->unique();
-            $table->string('Email_Client',60)->nullable();
-            $table->integer('Whatsapp_Client');
-            $table->boolean('Status_Client');
+            $table->string('Cpf',11)->nullable()->unique();
+            $table->string('Email',60)->nullable();
+            $table->unsignedInteger('Whatsapp');
+            $table->boolean('Status');
             $table->timestamps();
         });
         Schema::create('Client_Address', function (Blueprint $table) {
@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('Name_Street',);
             $table->string('Number_Street',4);
             $table->string('Complement_Street',255);
-            $table->integer('Zip_Code');
+            $table->unsignedBigInteger('Zip_Code');
             $table->foreignId('Id_Client')->constrained('Client')->onDelete('cascade');
         });
     }
