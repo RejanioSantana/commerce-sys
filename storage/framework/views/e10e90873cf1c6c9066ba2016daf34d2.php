@@ -43,7 +43,7 @@
                 <li>
                     <a ><i class="fa fa-circle-o"></i> <span class="nav-label">Cliente</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
-                        <li><a href="#">Novo Cliente</a></li>
+                        <li><a href="<?php echo e(route('client.create')); ?>">Novo Cliente</a></li>
                         <li><a href="<?php echo e(route('client.index')); ?>">Todos os Cliente</a></li>
                    
                     </ul>

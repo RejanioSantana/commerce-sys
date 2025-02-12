@@ -155,6 +155,25 @@
 
         });
     </script>
+
+    <script>
+            document.getElementById('celljr').addEventListener('input', function (e) {
+                let numero = e.target.value.replace(/\D/g, ''); // Remove tudo que não for número
+                let formato = '';
+
+                if (numero.length > 10) {
+                    formato = `(${numero.slice(0, 2)})${numero.slice(2, 7)}-${numero.slice(7, 11)}`;
+                } else if (numero.length > 6) {
+                    formato = `(${numero.slice(0, 2)})${numero.slice(2, 6)}-${numero.slice(6, 10)}`;
+                } else if (numero.length > 2) {
+                    formato = `(${numero.slice(0, 2)})${numero.slice(2)}`;
+                } else if (numero.length > 0) {
+                    formato = `(${numero}`;
+                }
+
+                e.target.value = formato;
+            });
+        </script>
     
 </body>
 </html>

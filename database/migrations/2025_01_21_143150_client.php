@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('First_Name',11);
             $table->string('Last_Name',40);
-            $table->string('Cpf',11)->nullable()->unique();
+            $table->string('Cpf',11)->nullable();
             $table->string('Email',60)->nullable();
-            $table->unsignedInteger('Whatsapp');
+            $table->unsignedBigInteger('Whatsapp');
             $table->boolean('Status');
             $table->timestamps();
         });
