@@ -57,6 +57,9 @@
                    
                     </ul>
                 </li>
+                <li>
+                    <a href="{{route('company.index')}}"><i class="fa fa-home"></i> <span class="nav-label">Empresa</span></a>
+                </li>
 
             </ul>
 

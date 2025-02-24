@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Cash\CashController;
 use App\Http\Controllers\Client\ClientController;
+use App\Http\Controllers\Company\CompanyController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Sale\SaleController;
 use App\Http\Controllers\Sale\Search;
@@ -40,3 +41,5 @@ Route::resource('/cash',CashController::class)->only(['index','destroy','create'
 Route::resource('/sale', SaleController::class);
 Route::post('sale/search',[Search::class,'search'])->name('sale.search');
 Route::get('/search/client',[Search::class,'client'])->name('search.client');
+//Company
+Route::get('/company',[CompanyController::class,'index'])->name('company.index');

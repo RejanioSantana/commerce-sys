@@ -57,6 +57,9 @@
                    
                     </ul>
                 </li>
+                <li>
+                    <a href="<?php echo e(route('company.index')); ?>"><i class="fa fa-home"></i> <span class="nav-label">Empresa</span></a>
+                </li>
 
             </ul>
 

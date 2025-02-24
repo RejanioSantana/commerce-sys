@@ -4,7 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Venda de Produtos</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/css/animate.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/font-awesome/css/font-awesome.css')}}" rel="stylesheet">
+
+
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> -->
     <style>
         body {
             background-color: #6a0dad;
@@ -100,6 +106,7 @@
             font-weight: bold;
         }
     </style>
+
     <script>
         // Função para entrar no modo de tela cheia
         function entrarModoTelaCheia() {
@@ -385,7 +392,7 @@
 
     </script>
 </head>
-<body>
+<body >
     <header>
         <div class="logo">TotalSale</div>
         <div class="links">
@@ -396,6 +403,7 @@
 
     <h2>Venda</h2> <!-- Título fora da div e centralizado -->
     <div class="container">
+        @include('sale.message')
         <div class="row">
             <div class="col-md-12 pesquisa-container"> <!-- Barra de pesquisa com 100% de largura -->
                 <div class="mb-3">
@@ -508,6 +516,9 @@
 
     
     </form>
+
+
+
 
 </body>
 </html>
