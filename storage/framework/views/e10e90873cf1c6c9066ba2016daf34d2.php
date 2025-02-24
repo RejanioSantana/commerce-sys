@@ -24,7 +24,7 @@
                     <a href="<?php echo e(route("home")); ?>"><i class="fa fa-circle"></i> <span class="nav-label">Home</span></a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-arrow-circle-right"></i> <span class="nav-label">Venda</span></a>
+                    <a href="<?php echo e(route('sale.index')); ?>#}"><i class="fa fa-arrow-circle-right"></i> <span class="nav-label">Venda</span></a>
                 </li>
               
                 <li>

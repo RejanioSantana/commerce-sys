@@ -15,4 +15,12 @@ class Client extends Model
                 "Whatsapp",
                 "Status",
     ] ;
+    public static function clientsAll()
+    {
+        return self::where("id","!=",1)->get();
+    }
+    public static function cpf()
+    {
+        //
+    }
 }

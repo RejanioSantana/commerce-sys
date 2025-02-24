@@ -3,6 +3,8 @@
 use App\Http\Controllers\Cash\CashController;
 use App\Http\Controllers\Client\ClientController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\Sale\SaleController;
+use App\Http\Controllers\Sale\Search;
 use App\Http\Controllers\Stock\CategoryController;
 use App\Http\Controllers\Stock\ProductController;
 use App\Http\Controllers\Stock\UnitController;
@@ -34,3 +36,7 @@ Route::get('/category/destroy/{id}', [CategoryController::class,'destroy'])->nam
 Route::resource('/client',ClientController::class);
 //Cash
 Route::resource('/cash',CashController::class)->only(['index','destroy','create','store','show']);
+//Sale
+Route::resource('/sale', SaleController::class);
+Route::post('sale/search',[Search::class,'search'])->name('sale.search');
+Route::get('/search/client',[Search::class,'client'])->name('search.client');

@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('Name_Item_Sale');
             $table->unsignedInteger('Amount_Item');
             $table->decimal('Unit_Value',8,2);
+            $table->foreignId('Id_Sale')->constrained('Sale');
             $table->timestamps();
         });
     }

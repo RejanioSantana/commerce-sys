@@ -14,7 +14,8 @@ class ClientController extends Controller
      */
     public function index()
     {
-        return view("client/index", ["title" => "Cliente"]);
+        $clients = Client::paginate(10);
+        return view("client/index", ["title" => "Cliente","client"=> $clients]);
     }
     
     /**
@@ -31,6 +32,7 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request);
         $validated = $request->validate([
             "name"=> "required",
             "last-name"=> "required",
@@ -42,6 +44,7 @@ class ClientController extends Controller
         $email = $request["email"]? $request["email"]: "";
         $whatsapp = $validated["whatsapp"];
         $whatsapp = whatsappNumber($whatsapp);
+        
         $send = Client::create([
             "First_Name" => $name,
             "Last_Name" => $last_name,

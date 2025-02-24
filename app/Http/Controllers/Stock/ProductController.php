@@ -14,6 +14,7 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
+        
         if ($request->input('s')) {
 
             $data = Product::where('Name_Product',"like","%{$request->input('s')}%")
