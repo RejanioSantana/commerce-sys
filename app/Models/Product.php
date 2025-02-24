@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $table = "Product";
+    protected $primaryKey = 'Cod_Product'; 
     protected $fillable = [
                 "Cod_Product",
                 "Name_Product",
@@ -18,4 +19,10 @@ class Product extends Model
                 "Id_Unit_Type",
                 "Id_Product_Category",
     ] ;
+
+    public function updateStock($qtd)
+    {
+        $this->decrement('Amount_Product', $qtd);
+    }
+
 }

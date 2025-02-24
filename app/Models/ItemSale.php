@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ItemSale extends Model
 {
-    protected $table = "Sale";
+    protected $table = "Item_Sale";
 
     protected $fillable = ['Cod_Product',
                         'Name_Item_Sale',
@@ -25,14 +25,15 @@ class ItemSale extends Model
              $dataInsert[] = [
                  'Cod_Product'   => $cod,
                  'Name_Item_Sale' => $item['Name_Product'],
-                 'Amount_Item' => $qtd,
+                 'Amount_Item' => intval($qtd),
                  'Unit_Value'      => $item['Sale_Value'],
                  'Id_Sale'      => $idSale,
                  'created_at' => now(),
                  'updated_at' => now(),
              ];
         }
-        return self::insert($dataInsert);
+        
+        return self::insert($dataInsert);;
     }
 
 }

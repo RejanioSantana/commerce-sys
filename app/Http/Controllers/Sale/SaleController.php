@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Sale;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cash;
+use App\Models\CashBook;
 use App\Models\ItemSale;
 use App\Models\Product;
 use App\Models\Sale;
@@ -51,27 +53,32 @@ class SaleController extends Controller
 
         ];
 
-        // tipo de venda.
-        if($data["typeSale"]){
-            dd($data);
-        }else{
-            dd($data);
-            $sale = Sale::create([
-                'Discount_Sale' => $data['discount'],
-                'Date_Sale' => date('Y-m-d H:i:s'),
-                'Id_User' => Auth::user()->id,
-                'Id_Client' => 1,
-            ]);
-            dd('pausa');
-            $itensSale = ItemSale::insertItens($data['product'],$sale->id);
-            if(!$itensSale){
-                return redirect()->back()->with('error','Venda não realizada!');
+        $sale = Sale::create([
+            'Discount_Sale' => $data['discount'],
+            'Date_Sale' => date('Y-m-d H:i:s'),
+            'Id_User' => Auth::user()->id,
+            'Id_Client' => $data['idClient'],
+        ]);
+        $itensSale = ItemSale::insertItens($data['product'],$sale->id);
+        if(!$itensSale){
+            return redirect()->back()->with('error','Venda não realizada!');
+        }
+        $launchCash = CashBook::saleParttern($data['idClient'],$data['product'],$data['discount'],$data['payClient']);    
+        if(!$launchCash){
+            return redirect()->back()->with('error','Compra não registrada no caixa!');
+        }   
+        dump($data['product']);
+        foreach($data['product'] as $index => $value){
+            $produto = Product::where('Cod_Product',$index)->first();
+            if($produto['Amount_Product']>= $value){
+                $produto->decrement('Amount_Product',$value);
             }
-
+            $produto->decrement('Amount_Product',0);
             
         }
+        
 
-        return redirect()->back()->with('error','Venda não realizada!');
+        return redirect()->back()->with('success','Venda realizada!');
     }
 
     /**

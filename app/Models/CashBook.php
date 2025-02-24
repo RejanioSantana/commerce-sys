@@ -18,7 +18,7 @@ class CashBook extends Model
                 "Id_Client",
  
     ] ;
-    public static function insertCashBook($typeInput,$idClient,$value)
+    public static function insertCashBook($typeInput,$idClient,$value,$description)
     {
         //Verificando se existe caixa e pegando o id.
         $virificationCash = Cash::where("Cash_Date",date('Y-m-01'))->count();
@@ -68,13 +68,38 @@ class CashBook extends Model
         
         self::create([
            "Date_Cash_Book" => date("Y-m-d"),
-           "Note_Cash_Book" => "Venda Padrão",
+           "Note_Cash_Book" => $description,
            "Type_Cash_Book" => $typeInput,
            "Value_Cash_Book" => $value,
            "Id_User" => Auth::user()->id,
            "Id_Cash" => $cash,
            "Id_Client" => $idClient
         ]);
+
+    }
+    public static function saleParttern(int $idClient,array $products, float $discount, float $pay)
+    {
+        if($idClient != 1){
+            if($pay > 0){
+                self::insertCashBook(1,$idClient,$pay,"Venda Padrão");
+            }
+            return;
+        }
+        $total = 0;
+        foreach ($products as $cod => $qtd) {
+            $item = Product::where('Cod_Product',$cod)
+                    ->selectRaw("SUM(Sale_Value  * $qtd) as total_value")
+                    ->value('total_value');
+            if(!$item){
+                return false;
+            }
+            $total += floatval($item);
+        }
+        $total = $total - $discount;
+        $typeInput = ($total > 0)? 1:0;
+        self::insertCashBook($typeInput,$idClient,$total,"Venda Padrão");
+
+        return true;
 
     }
 }
