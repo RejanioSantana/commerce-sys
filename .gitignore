@@ -22,3 +22,5 @@ yarn-error.log
 /.vscode
 /.zed
 /template
+/app/Services
+/storage/certificados

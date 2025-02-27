@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Company;
 
 use App\Http\Controllers\Controller;
+use App\Services\NFCE;
 use Illuminate\Http\Request;
+
 
 class CompanyController extends Controller
 {
@@ -12,6 +14,9 @@ class CompanyController extends Controller
      */
     public function index()
     {
+    //    $xml = NFCE::emitirNFE();
+    //    $xmlAssinado = NFCE::assinarXML($xml);
+    //    NFCE::sendSefaz($xmlAssinado);
         return view('company/index',["title"=>"Perfil Empresa"]);
     }
 
