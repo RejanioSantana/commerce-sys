@@ -15,8 +15,11 @@ return new class extends Migration
         Schema::create("Company", function (Blueprint $table) {
             $table->id();
             $table->string('Name_Company');
-            $table->string('Cnpj_Company');
-            $table->bigInteger('Phone_Company');
+            $table->string('Name_Fantasy');
+            $table->string('Cnpj');
+            $table->unsignedBigInteger('Phone');
+            $table->unsignedBigInteger('IE');
+            $table->decimal('ICMS',6,2);
             $table->timestamps();
         });
         Schema::create('users', function (Blueprint $table) {

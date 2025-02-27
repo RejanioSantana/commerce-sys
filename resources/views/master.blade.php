@@ -19,13 +19,13 @@
 
 </head>
 
-<body class="fixed-navigation">
-    <div id="wrapper">
+<body class="fixed-navigation" >
+    <div id="wrapper" >
     <nav class="navbar-default navbar-static-side" role="navigation">
         @include('partials.nav')
     </nav>
 
-        <div id="page-wrapper" class="gray-bg sidebar-content">
+        <div id="page-wrapper" class="gray-bg sidebar-content" >
         <div class="row border-bottom">
         <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
             @include('partials.navbar')
@@ -34,7 +34,7 @@
             <!-- <div class="sidebard-panel">
                 @include('partials.sidebard')
             </div> -->
-            <div class="wrapper wrapper-content">
+            <div class="wrapper wrapper-content" >
                 @yield('main')
             </div>
         <div class="footer">

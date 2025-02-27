@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Company;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company;
+use App\Models\User;
 use App\Services\NFCE;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 
 class CompanyController extends Controller
 {
@@ -17,7 +19,9 @@ class CompanyController extends Controller
     //    $xml = NFCE::emitirNFE();
     //    $xmlAssinado = NFCE::assinarXML($xml);
     //    NFCE::sendSefaz($xmlAssinado);
-        return view('company/index',["title"=>"Perfil Empresa"]);
+        $c = User::select('Id_Company')->where('id',Auth::user()->id)->first();
+        $c = Company::where('id',$c->Id_Company)->first();
+        return view('company/index',["title"=>"Perfil Empresa", "data" => $c]);
     }
 
     /**

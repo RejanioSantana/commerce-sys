@@ -23,8 +23,11 @@ class DatabaseSeeder extends Seeder
         // ]);
         DB::table("Company")->insert([
             "Name_Company"=> "Material Andrade",
-            "Cnpj_Company" => "64819913000191",
-            "Phone_Company"=> 75999531123,
+            "Name_Fantasy"=> "Material Andrade",
+            "Cnpj" => "64819913000191",
+            "Phone"=> 75999531123,
+            "IE" => 64819913000191,
+            "ICMS" => "10.22",
         ]);
         DB::table("users")->insert([
             "First_Name" => "Rejanio",

@@ -22,11 +22,13 @@ return new class extends Migration
         });
         Schema::create('Product', function (Blueprint $table) {
             $table->id('Cod_Product');
+            $table->unsignedInteger('Ncm');
             $table->string('Name_Product');
             $table->unsignedInteger('Amount_Product');
             $table->unsignedInteger('Min_Amount');
             $table->decimal('Purchase_Value',8,2);
             $table->decimal('Sale_Value',8,2);
+            $table->decimal('ICMS',8,2);
             $table->string('Note_Product')->nullable();
             $table->foreignId('Id_Unit_Type')->nullable()->constrained('Unit_Type');
             $table->foreignId('Id_Product_Category')->nullable()->constrained('Product_Category');

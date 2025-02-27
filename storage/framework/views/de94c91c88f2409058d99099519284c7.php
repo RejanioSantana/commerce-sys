@@ -19,31 +19,31 @@
 
 </head>
 
-<body class="fixed-navigation">
-    <div id="wrapper">
+<body class="fixed-navigation" >
+    <div id="wrapper" >
     <nav class="navbar-default navbar-static-side" role="navigation">
-        <?php echo $__env->make('partials.nav', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+        <?php echo $__env->make('partials.nav', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
     </nav>
 
-        <div id="page-wrapper" class="gray-bg sidebar-content">
+        <div id="page-wrapper" class="gray-bg sidebar-content" >
         <div class="row border-bottom">
         <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
-            <?php echo $__env->make('partials.navbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+            <?php echo $__env->make('partials.navbar', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
         </nav>
         </div>
             <!-- <div class="sidebard-panel">
-                <?php echo $__env->make('partials.sidebard', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                <?php echo $__env->make('partials.sidebard', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
             </div> -->
-            <div class="wrapper wrapper-content">
+            <div class="wrapper wrapper-content" >
                 <?php echo $__env->yieldContent('main'); ?>
             </div>
         <div class="footer">
-            <?php echo $__env->make('partials.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+            <?php echo $__env->make('partials.footer', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
         </div>
 
         </div>
         <div id="right-sidebar">
-            <?php echo $__env->make('partials.right-sidebar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+            <?php echo $__env->make('partials.right-sidebar', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
         </div>
     </div>
 
