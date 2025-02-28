@@ -16,17 +16,18 @@ class ItemSale extends Model
 
     public static function insertItens(array $itens,$idSale)
     {
+        
         $dataInsert = [];
-        foreach ($itens as $cod => $qtd) {
-            $item = Product::where('Cod_Product',$cod)->get()->first();
+        foreach ($itens as $id => $qtd) {
+            $item = Product::where('id',$id)->get()->first();
             if(!$item){
                 return false;
             }
              $dataInsert[] = [
-                 'Cod_Product'   => $cod,
                  'Name_Item_Sale' => $item['Name_Product'],
                  'Amount_Item' => intval($qtd),
                  'Unit_Value'      => $item['Sale_Value'],
+                 'Id_Product'   => $item['id'],
                  'Id_Sale'      => $idSale,
                  'created_at' => now(),
                  'updated_at' => now(),

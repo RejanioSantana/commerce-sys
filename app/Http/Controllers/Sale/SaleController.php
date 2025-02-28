@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Sale;
 use App\Http\Controllers\Controller;
 use App\Models\Cash;
 use App\Models\CashBook;
+use App\Models\Company;
 use App\Models\ItemSale;
 use App\Models\Product;
 use App\Models\Sale;
+use App\Services\NFCE;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -67,18 +69,26 @@ class SaleController extends Controller
         if(!$launchCash){
             return redirect()->back()->with('error','Compra não registrada no caixa!');
         }   
-        dump($data['product']);
-        foreach($data['product'] as $index => $value){
-            $produto = Product::where('Cod_Product',$index)->first();
+
+        foreach($data['product'] as $id => $value){
+            $produto = Product::where('id',$id)->first();
             if($produto['Amount_Product']>= $value){
                 $produto->decrement('Amount_Product',$value);
             }
             $produto->decrement('Amount_Product',0);
             
         }
-        
 
-        return redirect()->back()->with('success','Venda realizada!');
+        $company = Company::where('id',Auth::user()->Id_Company)->first();
+        
+        $xml = NFCE::emitirNFE($company,$data);
+        if(!$xml){
+            dd('XML não gerado');
+        }
+        $xmlAssinado = NFCE::assinarXML($xml);
+        NFCE::sendSefaz($xmlAssinado);
+
+        // return redirect()->back()->with('success','Venda realizada!');
     }
 
     /**

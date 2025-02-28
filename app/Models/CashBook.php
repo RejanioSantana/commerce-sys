@@ -86,8 +86,8 @@ class CashBook extends Model
             return;
         }
         $total = 0;
-        foreach ($products as $cod => $qtd) {
-            $item = Product::where('Cod_Product',$cod)
+        foreach ($products as $id => $qtd) {
+            $item = Product::where('id',$id)
                     ->selectRaw("SUM(Sale_Value  * $qtd) as total_value")
                     ->value('total_value');
             if(!$item){

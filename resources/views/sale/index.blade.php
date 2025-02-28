@@ -265,7 +265,7 @@
                                 <td>${produto.Cod_Product}</td>
                                 <td>${produto.Name_Product}</td>
                                 <td>R$ ${produto.Sale_Value}</td>
-                                <td><input type="number" name="product[${produto.Cod_Product}]" value="${quantidade}" min="1" onchange="atualizarQuantidade(this, ${produto.Sale_Value})"></td>
+                                <td><input type="number" name="product[${produto.id}]" value="${quantidade}" min="1" onchange="atualizarQuantidade(this, ${produto.Sale_Value})"></td>
                                 <td>R$ ${subtotal}</td>
                                 <td><button class='btn btn-danger btn-sm' onclick='removerProduto(this)'>Remover</button></td>
                             </tr>`;
