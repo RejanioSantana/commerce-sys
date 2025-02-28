@@ -21,7 +21,7 @@ return new class extends Migration
         });
         Schema::create('Item_Sale', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('Cod_Product')->constrained('Product','Cod_Product');
+            $table->foreignId('Cod_Product')->constrained('Product');
             $table->string('Name_Item_Sale');
             $table->unsignedInteger('Amount_Item');
             $table->decimal('Unit_Value',8,2);

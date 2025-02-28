@@ -37,7 +37,40 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $r = $request->validate([
+                'id' => 'required',
+                'name' => 'required',
+                'name_fantasy' => 'required',
+                'cnpj' => 'required',
+                'phone' => 'required',
+                'ie' => 'required',
+                'icms' => 'required',
+            ]);
+            $name =  strtoupper($r['name']);
+            $fantasy =  strtoupper($r['name_fantasy']);
+            $cnpj = (strlen($r['cnpj'])== 14)? intval($r['cnpj']): 0;
+            
+            $phone = intval($r['phone']);
+            $ie =  intval($r['ie']);
+            $icms =  floatval($r['icms']);
+            $reponse = Company::where('id', $r['id'])->update([
+                'Name_Company' => $name,
+                'Name_Fantasy' => $fantasy,
+                'Cnpj' => $cnpj,
+                'Phone' => $phone,
+                'IE' => $ie,
+                'ICMS' => $icms,
+            ]);
+            if($reponse){
+                return redirect()->back()->with('success','Dados atualizados.');
+            }
+            return redirect()->back()->with('error','Dados não atualizados.');
+
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error','Dados não atualizados.');
+        }
+
     }
 
     /**

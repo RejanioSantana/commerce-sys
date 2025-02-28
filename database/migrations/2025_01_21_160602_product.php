@@ -21,8 +21,9 @@ return new class extends Migration
             $table->string("Name_Product_Category",20);
         });
         Schema::create('Product', function (Blueprint $table) {
-            $table->id('Cod_Product');
-            $table->unsignedInteger('Ncm');
+            $table->id();
+            $table->string('Cod_Product');
+            $table->unsignedBigInteger('Ncm');
             $table->string('Name_Product');
             $table->unsignedInteger('Amount_Product');
             $table->unsignedInteger('Min_Amount');
@@ -40,7 +41,7 @@ return new class extends Migration
             $table->decimal('Value_Return_Product',8,2);
             $table->foreignId('Id_Client')->constrained('Client');
             $table->foreignId('Id_Cash_Book')->constrained('Cash_Book');
-            $table->foreignId('Cod_Product')->constrained('Product','Cod_Product');
+            $table->foreignId('Cod_Product')->constrained('Product');
             
         });
     }

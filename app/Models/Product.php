@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $table = "Product";
-    protected $primaryKey = 'Cod_Product'; 
     protected $fillable = [
                 "Cod_Product",
                 "Name_Product",
+                "Ncm",
                 "Amount_Product",
                 "Min_Amount",
                 "Purchase_Value",

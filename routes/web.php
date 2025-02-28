@@ -25,6 +25,7 @@ Route::get('/addproduct', [ProductController::class,'create'])->name('product.cr
 Route::post('/addproduct', [ProductController::class,'store'])->name('product.store');
 Route::post('/product/update', [ProductController::class,'update'])->name('product.update');
 Route::get('/product/edit', [ProductController::class,'edit'])->name('product.edit');
+Route::get('/product/search-code/{id}', [ProductController::class,'sCode'])->name('product.scode');
 // Unit of Product.
 Route::get('/unit', [UnitController::class,'index'])->name('unit');
 Route::post('/unit', [UnitController::class,'store'])->name('unit');
@@ -42,4 +43,4 @@ Route::resource('/sale', SaleController::class);
 Route::post('sale/search',[Search::class,'search'])->name('sale.search');
 Route::get('/search/client',[Search::class,'client'])->name('search.client');
 //Company
-Route::get('/company',[CompanyController::class,'index'])->name('company.index');
+Route::resource('/company',CompanyController::class);

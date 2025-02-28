@@ -10,17 +10,18 @@
                             
                         </div>
             <div class="ibox-content" >
-            <form role="form" class="form-horizontal" name="formulario" method="post" action="#">
+            <form role="form" class="form-horizontal" name="formulario" method="post" action="{{ route('company.store') }}">
             @csrf
+            <input type="hidden" name="id" value="{{ $data->id }}">
             <div class="form-group">
                 <label class="col-sm-6">
                     <label>Nome Comercial</label>
-                    <input type="text" class="form-control" value="{{ $data->Name_Company }}">
+                    <input type="text" name="name" class="form-control" value="{{ $data->Name_Company }}">
                 
                 </label>
                 <label class="col-sm-6">
                     <label>Nome Fantasia</label>
-                    <input type="text" class="form-control" value="{{ $data->Name_Fantasy }}">
+                    <input type="text" name="name_fantasy" class="form-control" value="{{ $data->Name_Fantasy }}">
                 </label>
             
             </div>
@@ -31,12 +32,12 @@
             <div class="form-group">
                 <label class="col-sm-6">
                     <label>CNPJ</label>
-                    <input type="text" class="form-control" value="{{ $data->Cnpj}}">
+                    <input type="text" name="cnpj" class="form-control" value="{{ $data->Cnpj}}">
                 
                 </label>
                 <label class="col-sm-6">
                     <label>Telefone</label>
-                    <input type="text" class="form-control" value="{{ $data->Phone }}">
+                    <input type="text" name="phone" class="form-control" value="{{ $data->Phone }}">
                 </label>
             
             </div>
@@ -45,7 +46,7 @@
             <div class="form-group">
                 <label class="col-sm-6">
                     <label>IE</label>
-                    <input type="text" class="form-control" value="{{ $data->IE }}">
+                    <input type="text" name="ie" class="form-control" value="{{ $data->IE }}">
                 
                 </label>
                 <label class="col-sm-6">

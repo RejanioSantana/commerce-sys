@@ -7,7 +7,7 @@ use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
-use Log;
+
 use function Laravel\Prompts\select;
 
 class ProductController extends Controller
@@ -36,6 +36,7 @@ class ProductController extends Controller
     {
         $validated = $request->validate([
             "cod"=> "required|max:20",
+            "ncm"=> "required|max:20",
             "name"=> "required|max:50",
             "amount"=> "required|max:10",
             "min-amount"=> "required|max:10",
@@ -47,6 +48,7 @@ class ProductController extends Controller
         ]);
             
             $cod = intval($validated["cod"]);
+            $ncm = intval($validated["ncm"]);
             $amount = intval($validated["amount"]);
             $unit = intval($validated["unit"]);
             $category = intval($validated["category"]);
@@ -60,12 +62,15 @@ class ProductController extends Controller
             };
 
             $insert = Product::create([
+                
                 "Cod_Product"=> $cod,
                 "Name_Product"=> strtoupper($validated["name"]),
+                "Ncm"=> strtoupper($validated["name"]),
                 "Amount_Product"=> $amount,
                 "Min_Amount"=> $minAmount,
                 "Purchase_Value"=> $pucharseValue,
                 "Sale_Value"=> $saleValue,
+                "ICMS"=> $saleValue,
                 "Note_Product"=> $request["note"],
                 "Id_Unit_Type"=> $unit,
                 "Id_Product_Category"=> $category,
@@ -127,6 +132,10 @@ class ProductController extends Controller
 
     }
 
-
+    public function sCode($id)
+    {
+        //
+        
+    }
 
 }

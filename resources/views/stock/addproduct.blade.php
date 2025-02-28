@@ -14,7 +14,11 @@
 
                                 <div class="form-group"><label class="col-sm-2 control-label">Codigo*</label>
 
-                                    <div class="col-sm-10"><input type="text" name="cod" pattern="\d+" maxlength="20" class="form-control" required></div>
+                                    <div class="col-sm-10"><input type="text" name="cod" maxlength="20" class="form-control" required></div>
+                                </div>
+                                <div class="form-group"><label class="col-sm-2 control-label">NCM*</label>
+
+                                    <div class="col-sm-10"><input type="text" name="ncm" pattern="\d+" maxlength="20" class="form-control" required></div>
                                 </div>
 
                                 <div class="form-group"><label class="col-sm-2 control-label">Nome*</label>
