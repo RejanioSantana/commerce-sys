@@ -15,6 +15,7 @@ class Product extends Model
                 "Min_Amount",
                 "Purchase_Value",
                 "Sale_Value",
+                "ICMS",
                 "Note_Product",
                 "Id_Unit_Type",
                 "Id_Product_Category",

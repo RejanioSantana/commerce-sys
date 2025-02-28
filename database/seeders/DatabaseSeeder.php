@@ -15,12 +15,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        
         DB::table("Company")->insert([
             "Name_Company"=> "Material Andrade",
             "Name_Fantasy"=> "Material Andrade",
@@ -45,6 +40,19 @@ class DatabaseSeeder extends Seeder
             "Email" => "admin@admin.com",
             "Whatsapp" => 1,
             "Status"=> 1,
+         ]);
+        DB::table("Unit_Type")->insert([
+            ["Name_Unit_Type" => "Unidade",
+            "Short_Name" => "UN"],
+            ["Name_Unit_Type" => "Quilograma",
+            "Short_Name" => "KG"],
+            ["Name_Unit_Type" => "Litro",
+            "Short_Name" => "LT"],
+            ["Name_Unit_Type" => "Saco",
+            "Short_Name" => "SC"],
+            ["Name_Unit_Type" => "Metro Quadrado",
+            "Short_Name" => "M2"],
+            
          ]);
     }
 }

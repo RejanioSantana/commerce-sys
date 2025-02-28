@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Stock;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use function Laravel\Prompts\select;
 
@@ -34,49 +36,68 @@ class ProductController extends Controller
     }
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            "cod"=> "required|max:20",
-            "ncm"=> "required|max:20",
-            "name"=> "required|max:50",
-            "amount"=> "required|max:10",
-            "min-amount"=> "required|max:10",
-            "pucharse-value"=> "required|max:11",
-            "sale-value"=> "required|max:11",
-            "unit"=> "required|max:20",
-            "category"=> "required|max:20",
-            "note"=> "max:255",
-        ]);
+        try {
             
-            $cod = intval($validated["cod"]);
-            $ncm = intval($validated["ncm"]);
-            $amount = intval($validated["amount"]);
-            $unit = intval($validated["unit"]);
-            $category = intval($validated["category"]);
-            $minAmount = intval($validated["min-amount"]);
-            $pucharseValue = floatval($validated["pucharse-value"]);
-            $saleValue = floatval($validated["sale-value"]);
-
-            $statusProduct = Product::where("Cod_Product",$cod)->count();
+            $validated = $request->validate([
+                "cod"=> "max:20",
+                "ncm"=> "required|max:20",
+                "name"=> "required|max:50",
+                "amount"=> "required|max:10",
+                "min-amount"=> "required|max:10",
+                "pucharse-value"=> "required|max:11",
+                "sale-value"=> "required|max:11",
+                "unit"=> "required|max:20",
+                "category"=> "required|max:20",
+                "note"=> "max:255",
+            ]);
+            $taxIcms = Company::select('ICMS')->where('id',Auth::user()->Id_Company)->first();
+            $taxIcms = $taxIcms->ICMS /100;
+            $data = [ 
+                "cod" => (intval($validated["cod"]) == "" OR $validated["cod"] == 0)? "SEM GTIN": $validated["cod"],
+                "name" => strtoupper($validated["name"]),
+                "ncm" => intval($validated["ncm"]),
+                "amount" => intval($validated["amount"]),
+                "unit" => intval($validated["unit"]),
+                "category" => intval($validated["category"]),
+                "minAmount" => intval($validated["min-amount"]),
+                "pucharseValue" => floatval($validated["pucharse-value"]),
+                "saleValue" => floatval($validated["sale-value"]),
+                "icms" => $taxIcms * floatval($validated["sale-value"]),
+                "note" => $request['note'],
+                
+            ];
+            $statusProduct = Product::where("Cod_Product",$data['cod'])->count();
+            
             if($statusProduct){
                 return redirect()->back()->with("flash","Esse produto já existe.");
             };
-
             $insert = Product::create([
                 
-                "Cod_Product"=> $cod,
-                "Name_Product"=> strtoupper($validated["name"]),
-                "Ncm"=> strtoupper($validated["name"]),
-                "Amount_Product"=> $amount,
-                "Min_Amount"=> $minAmount,
-                "Purchase_Value"=> $pucharseValue,
-                "Sale_Value"=> $saleValue,
-                "ICMS"=> $saleValue,
-                "Note_Product"=> $request["note"],
-                "Id_Unit_Type"=> $unit,
-                "Id_Product_Category"=> $category,
+                "Cod_Product"=> $data['cod'],
+                "Name_Product"=> $data['name'],
+                "Ncm"=> $data['ncm'],
+                "Amount_Product"=> $data['amount'],
+                "Min_Amount"=> $data['minAmount'],
+                "Purchase_Value"=> $data['pucharseValue'],
+                "Sale_Value"=> $data['saleValue'],
+                "ICMS"=> $data['icms'],
+                "Note_Product"=> $data['note'],
+                "Id_Unit_Type"=> $data['unit'],
+                "Id_Product_Category"=> $data['category'],
             ]);
-            return redirect()->back()->with("success","Produto adicionado com sucesso.");
-
+            if($insert){
+                return redirect()->back()->with("success","Produto adicionado com sucesso.");
+                
+            }
+            
+            return redirect()->back()->with("error","Error na inserção.");
+                
+            } catch (\Throwable $th) {
+                dd($th->getMessage());
+            return redirect()->back()->with("error","Item não cadastrado.");
+            
+        }
+        
       
     }
     public function update(Request $request)
