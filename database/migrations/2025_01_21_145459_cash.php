@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->decimal('Balance_Before',8,2);
             $table->date('Cash_Date');
+            $table->foreignId('Id_Company')->constrained('Company')->onDelete('cascade');
             $table->timestamps();
         });
         Schema::create('Cash_Book', function (Blueprint $table) {

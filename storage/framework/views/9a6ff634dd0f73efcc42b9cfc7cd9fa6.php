@@ -1,6 +1,6 @@
 <?php $__env->startSection('main'); ?>
 <div class="row">
-                    <div class="col-lg-12">
+                    <!-- <div class="col-lg-12">
                         <div class="ibox float-e-margins">
                             <div class="ibox-content">
                                     <div>
@@ -33,25 +33,65 @@
                             </div>
                         </div>
                     </div>
-                </div>
-
+                </div> -->
+    <h3>Este mês</h3>
 
                 <div class="row">
 
                     <div class="col-lg-4">
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
-                                <span class="label label-primary pull-right">Today</span>
-                                <h5>Vistits</h5>
+                                <!-- <span class="label label-primary pull-right">Today</span> -->
+                                <h5>Caixa Anterior</h5>
                             </div>
                             <div class="ibox-content">
-                                <h1 class="no-margins">22 285,400</h1>
-                                <div class="stat-percent font-bold text-navy">20% <i class="fa fa-level-up"></i></div>
-                                <small>New orders</small>
+                                <h1 class="no-margins"><?php echo e($data['balanceBefore']); ?></h1>
+                                <!-- <div class="stat-percent font-bold text-navy">20% <i class="fa fa-level-up"></i></div> -->
+                                <!-- <small>New orders</small> -->
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <!-- <span class="label label-primary pull-right">Today</span> -->
+                                <h5>Despesa</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <h1 class="no-margins"><?php echo e($data['expense']); ?></h1>
+                                <!-- <div class="stat-percent font-bold text-navy">20% <i class="fa fa-level-up"></i></div> -->
+                                <!-- <small>New orders</small> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <!-- <span class="label label-primary pull-right">Today</span> -->
+                                <h5>Receita</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <h1 class="no-margins"><?php echo e($data['revenue']); ?></h1>
+                                <!-- <div class="stat-percent font-bold text-navy">20% <i class="fa fa-level-up"></i></div> -->
+                                <!-- <small>New orders</small> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <!-- <span class="label label-primary pull-right">Today</span> -->
+                                <h5>Caixa</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <h1 class="no-margins"><?php echo e($data['currentCash']); ?></h1>
+                                <!-- <div class="stat-percent font-bold text-navy">20% <i class="fa fa-level-up"></i></div> -->
+                                <!-- <small>New orders</small> -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- <div class="col-lg-4">
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">
                                 <span class="label label-info pull-right">Monthly</span>
@@ -77,9 +117,9 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
-                <div class="row">
+                <!-- <div class="row">
                 <div class="col-lg-6">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
@@ -260,8 +300,9 @@
                     </div>
                 </div>
 
-                </div>
+            </div> -->
+</div>
 
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/Rejanio/trampo/material-construcao/app/resources/views/home.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('master', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH /home/Rejanio/trampo/material-construcao/app/resources/views/home.blade.php ENDPATH**/ ?>

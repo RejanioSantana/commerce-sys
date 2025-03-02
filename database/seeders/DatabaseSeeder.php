@@ -40,6 +40,7 @@ class DatabaseSeeder extends Seeder
             "Email" => "admin@admin.com",
             "Whatsapp" => 1,
             "Status"=> 1,
+            "Id_Company" => 1,
          ]);
         DB::table("Unit_Type")->insert([
             ["Name_Unit_Type" => "Unidade",

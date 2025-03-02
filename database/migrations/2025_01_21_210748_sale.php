@@ -17,6 +17,7 @@ return new class extends Migration
             $table->date('Date_Sale');
             $table->foreignId('Id_User')->constrained('users');
             $table->foreignId('Id_Client')->constrained('Client');
+            $table->foreignId('Id_Company')->constrained('Company')->onDelete('cascade');
             $table->timestamps();
         });
         Schema::create('Item_Sale', function (Blueprint $table) {
@@ -28,6 +29,19 @@ return new class extends Migration
             $table->foreignId('Id_Sale')->constrained('Sale');
             $table->timestamps();
         });
+        Schema::create('Nfce', function (Blueprint $table) {
+            $table->id();
+            $table->string('num')->unique();
+            $table->string('serie');
+            $table->string('Passkey')->unique();
+            $table->text('xml');
+            $table->string('pdf_danfe')->nullable();
+            $table->enum('status', ['Autorizada', 'Cancelada', 'Rejeitada']);
+            $table->timestamp('date');
+            $table->foreignId('Id_Sale')->constrained('Sale');
+            $table->timestamps();
+        });
+        
     }
 
     /**

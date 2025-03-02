@@ -29,10 +29,10 @@ return new class extends Migration
             $table->unsignedInteger('Min_Amount');
             $table->decimal('Purchase_Value',8,2);
             $table->decimal('Sale_Value',8,2);
-            $table->decimal('ICMS',8,2);
             $table->string('Note_Product')->nullable();
             $table->foreignId('Id_Unit_Type')->nullable()->constrained('Unit_Type');
             $table->foreignId('Id_Product_Category')->nullable()->constrained('Product_Category');
+            $table->foreignId('Id_Company')->constrained('Company')->onDelete('cascade');
             $table->timestamps();
         });
         Schema::create('Return_Product', function (Blueprint $table) {

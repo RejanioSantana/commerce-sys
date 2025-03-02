@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('Email',60)->nullable();
             $table->unsignedBigInteger('Whatsapp');
             $table->boolean('Status');
+            $table->foreignId('Id_Company')->constrained('Company')->onDelete('cascade');
             $table->timestamps();
         });
         Schema::create('Client_Address', function (Blueprint $table) {
