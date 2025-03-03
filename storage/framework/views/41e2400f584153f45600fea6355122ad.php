@@ -15,7 +15,7 @@
                                         <div class="modal-body">
                                                     <div class="form-group">
                                                         <label for=""class="col-sm-1 control-label" >Nome</label>
-                                                        <input type="text" class="form-control col-sm-10" name="name" maxlength="20">
+                                                        <input type="text" class="form-control col-sm-10" name="name" maxlength="20" autocomplete="off" autocorrect="off" autocapitalize="off">
                                                     </div>
                                                 
                                                 </div>
@@ -69,4 +69,4 @@
 
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/Rejanio/trampo/material-construcao/app/resources/views/stock/category.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('master', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH /home/Rejanio/trampo/material-construcao/app/resources/views/stock/category.blade.php ENDPATH**/ ?>

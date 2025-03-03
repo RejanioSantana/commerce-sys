@@ -10,5 +10,6 @@ class Cash extends Model
     protected $fillable = [
                 "Balance_Before",
                 "Cash_Date",
+                "Id_Company"
     ] ;
 }

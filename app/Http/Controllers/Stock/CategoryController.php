@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -38,6 +39,7 @@ class CategoryController extends Controller
         try {
             DB::table("Product_Category")->insert([
                 "Name_Product_Category"=> $validated["name"],
+                "Id_Company"=> Auth::user()->Id_Company,
             ]);
             return redirect()->back();
 

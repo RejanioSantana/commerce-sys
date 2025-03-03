@@ -12,5 +12,6 @@ class Sale extends Model
                 "Date_Sale",
                 "Id_User",
                 "Id_Client",
+                "Id_Company",
     ] ;
 }

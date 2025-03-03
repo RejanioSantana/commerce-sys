@@ -60,6 +60,7 @@ class SaleController extends Controller
             'Date_Sale' => date('Y-m-d H:i:s'),
             'Id_User' => Auth::user()->id,
             'Id_Client' => $data['idClient'],
+            'Id_Company' => Auth::user()->Id_Company ,
         ]);
         $itensSale = ItemSale::insertItens($data['product'],$sale->id);
         if(!$itensSale){

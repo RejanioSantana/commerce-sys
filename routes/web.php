@@ -26,7 +26,7 @@ Route::middleware('auth')->group(function(){
     Route::post('/addproduct', [ProductController::class,'store'])->name('product.store');
     Route::post('/product/update', [ProductController::class,'update'])->name('product.update');
     Route::get('/product/edit', [ProductController::class,'edit'])->name('product.edit');
-    Route::get('/product/search-code/{id}', [ProductController::class,'sCode'])->name('product.scode');
+    Route::post('/product/search-code', [ProductController::class,'sCode'])->name('product.scode');
     // Unit of Product.
     Route::get('/unit', [UnitController::class,'index'])->name('unit');
     Route::post('/unit', [UnitController::class,'store'])->name('unit');

@@ -21,7 +21,8 @@ class CashBook extends Model
     public static function insertCashBook($typeInput,$idClient,$value,$description)
     {
         //Verificando se existe caixa e pegando o id.
-        $virificationCash = Cash::where("Cash_Date",date('Y-m-01'))->count();
+        $virificationCash = Cash::where("Cash_Date",date('Y-m-01'))
+                            ->where('Id_Company',Auth::user()->Id_Company)->count();
 
         if($virificationCash > 1){
            return redirect()->back()->with("error","Error interno, avise ao desenvolvedor.");
@@ -31,9 +32,10 @@ class CashBook extends Model
            $revenue = 0;
            $expense = 0;
 
-           $previousCash = Cash::where("Cash_Date", "<", date('Y-m-01'))
-           ->orderBy("Cash_Date", "desc")
-           ->first();
+           $previousCash =  Cash::where("Cash_Date", "<", date('Y-m-01'))
+                            ->where('Id_Company',Auth::user()->Id_Company)
+                            ->orderBy("Cash_Date", "desc")
+                            ->first();
 
            // Se existir um caixa anterior, pegar o saldo antes
        
@@ -58,10 +60,14 @@ class CashBook extends Model
            // Criando novo caixa com o saldo anterior
             Cash::create([
             "Balance_Before" => $balanceBefore,
-            "Cash_Date" => date('Y-m-01')
+            "Cash_Date" => date('Y-m-01'),
+            "Id_Company" => Auth::user()->Id_Company
             ]);
         }
-        $cash =   Cash::where("Cash_Date",date('Y-m-01'))->first();
+        $cash =   Cash::where("Cash_Date",date('Y-m-01'))
+                ->where('Id_Company',Auth::user()->Id_Company)
+                ->first();
+
         $cash = $cash->id;
 
         //Inserindo registro no livro caixa.

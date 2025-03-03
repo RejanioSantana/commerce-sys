@@ -17,6 +17,50 @@
     <!-- Sweet Alert -->
     <link href="<?php echo e(asset('assets/css/plugins/sweetalert/sweetalert.css')); ?>" rel="stylesheet">
 
+    <script>
+        function sCode(){
+
+            let termo = document.getElementById("codB").value;
+            let ncmP = document.getElementById("ncm-p");
+            let nameP = document.getElementById("name-p");
+            let loading = document.getElementById("loadp");
+
+            loading.style.display = "block";
+                
+            // Gerar a URL da rota 'sale.index' com o termo de pesquisa como parâmetro de consulta
+            const url = "<?php echo e(route('product.scode')); ?>";
+
+            // Enviar a requisição GET para a rota 'sale.index'
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>' // Adicionar o token CSRF para segurança
+                },
+                body: JSON.stringify({termo: termo}),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    alert('Item não encontrado.')
+                }
+                return response.json();
+            })
+            .then(data => {
+              
+                nameP.value = data.dados.description;
+                ncmP.value = data.dados.ncm.code;                    
+                
+                })
+            .catch(error => alert('Sem resultado da pesquisa.'))
+            .finally(() => {
+                // Oculta o loading após o término da requisição
+                loading.style.display = "none";
+                }); 
+                
+        }
+        
+    </script>
+
 </head>
 
 <body class="fixed-navigation" >

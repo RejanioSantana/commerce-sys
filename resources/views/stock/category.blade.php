@@ -16,7 +16,7 @@
                                         <div class="modal-body">
                                                     <div class="form-group">
                                                         <label for=""class="col-sm-1 control-label" >Nome</label>
-                                                        <input type="text" class="form-control col-sm-10" name="name" maxlength="20">
+                                                        <input type="text" class="form-control col-sm-10" name="name" maxlength="20" autocomplete="off" autocorrect="off" autocapitalize="off">
                                                     </div>
                                                 
                                                 </div>
