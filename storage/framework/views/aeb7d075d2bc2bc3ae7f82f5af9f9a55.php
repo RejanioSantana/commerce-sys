@@ -4,7 +4,7 @@
 
 <div class="row">
                 
-<?php echo $__env->make('stock.message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php echo $__env->make('stock.message', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 
                 <div class="col-lg-12">
                     <div class="ibox float-e-margins">
@@ -54,8 +54,8 @@
                                         <td>
                                             <form action="<?php echo e(route('product.edit')); ?>" method="get">
                                                 <?php echo csrf_field(); ?>
-                                            <input type="hidden" name="id" value="<?php echo e($index->Cod_Product); ?>">    
-                                            <button type="submit"><i class="fa fa-pencil text-danger demo3"></i></button>
+                                            <input type="hidden" name="id" value="<?php echo e($index->id); ?>">    
+                                            <button type="submit"><i class="fa fa-pencil text-danger "></i></button>
                                             </form>
                                             
                                         </td>
@@ -89,4 +89,4 @@
 
 
 
-<?php echo $__env->make('master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /home/Rejanio/trampo/material-construcao/app/resources/views/stock/index.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('master', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH /home/Rejanio/trampo/material-construcao/app/resources/views/stock/index.blade.php ENDPATH**/ ?>

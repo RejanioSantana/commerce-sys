@@ -55,8 +55,8 @@
                                         <td>
                                             <form action="{{route('product.edit') }}" method="get">
                                                 @csrf
-                                            <input type="hidden" name="id" value="{{$index->Cod_Product}}">    
-                                            <button type="submit"><i class="fa fa-pencil text-danger demo3"></i></button>
+                                            <input type="hidden" name="id" value="{{$index->id}}">    
+                                            <button type="submit"><i class="fa fa-pencil text-danger "></i></button>
                                             </form>
                                             
                                         </td>

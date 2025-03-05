@@ -20,67 +20,74 @@ class CashBook extends Model
     ] ;
     public static function insertCashBook($typeInput,$idClient,$value,$description)
     {
-        //Verificando se existe caixa e pegando o id.
-        $virificationCash = Cash::where("Cash_Date",date('Y-m-01'))
-                            ->where('Id_Company',Auth::user()->Id_Company)->count();
+        try {
+                //Verificando se existe caixa e pegando o id.
+            $virificationCash = Cash::where("Cash_Date",date('Y-m-01'))
+            ->where('Id_Company',Auth::user()->Id_Company)->count();
 
-        if($virificationCash > 1){
-           return redirect()->back()->with("error","Error interno, avise ao desenvolvedor.");
-        }
-        if(!$virificationCash){
-           $balanceBefore = 0;
-           $revenue = 0;
-           $expense = 0;
+            if($virificationCash > 1){
+            return redirect()->back()->with("error","Error interno, avise ao desenvolvedor.");
+            }
+            if(!$virificationCash){
+            $balanceBefore = 0;
+            $revenue = 0;
+            $expense = 0;
 
-           $previousCash =  Cash::where("Cash_Date", "<", date('Y-m-01'))
-                            ->where('Id_Company',Auth::user()->Id_Company)
-                            ->orderBy("Cash_Date", "desc")
-                            ->first();
+            $previousCash =  Cash::where("Cash_Date", "<", date('Y-m-01'))
+                    ->where('Id_Company',Auth::user()->Id_Company)
+                    ->orderBy("Cash_Date", "desc")
+                    ->first();
 
-           // Se existir um caixa anterior, pegar o saldo antes
-       
-           if($previousCash){
-               $balanceBefore += $previousCash->Balance_Before;
-               
-               $book = self::where("Id_Cash",$previousCash->id)->get();
+            // Se existir um caixa anterior, pegar o saldo antes
 
-               foreach($book as $index){
-                   if($index->Type_Cash_Book){
-                       $revenue += $index->Value_Cash_Book;
-                       continue;
-                   }
-                   $expense += $index->Value_Cash_Book;
-                   
-               }
+            if($previousCash){
+            $balanceBefore += $previousCash->Balance_Before;
 
-           }
-           
-           $balanceBefore = $balanceBefore + ($revenue - $expense);
-           
-           // Criando novo caixa com o saldo anterior
+            $book = self::where("Id_Cash",$previousCash->id)->get();
+
+            foreach($book as $index){
+            if($index->Type_Cash_Book){
+            $revenue += $index->Value_Cash_Book;
+            continue;
+            }
+            $expense += $index->Value_Cash_Book;
+
+            }
+
+            }
+
+            $balanceBefore = $balanceBefore + ($revenue - $expense);
+
+            // Criando novo caixa com o saldo anterior
             Cash::create([
             "Balance_Before" => $balanceBefore,
             "Cash_Date" => date('Y-m-01'),
             "Id_Company" => Auth::user()->Id_Company
             ]);
+            }
+            $cash =   Cash::where("Cash_Date",date('Y-m-01'))
+            ->where('Id_Company',Auth::user()->Id_Company)
+            ->first();
+
+            $cash = $cash->id;
+
+            //Inserindo registro no livro caixa.
+
+            self::create([
+            "Date_Cash_Book" => date("Y-m-d"),
+            "Note_Cash_Book" => $description,
+            "Type_Cash_Book" => $typeInput,
+            "Value_Cash_Book" => $value,
+            "Id_User" => Auth::user()->id,
+            "Id_Cash" => $cash,
+            "Id_Client" => $idClient
+            ]);
+
+            return true;
+
+        } catch (\Throwable $th) {
+            return false;
         }
-        $cash =   Cash::where("Cash_Date",date('Y-m-01'))
-                ->where('Id_Company',Auth::user()->Id_Company)
-                ->first();
-
-        $cash = $cash->id;
-
-        //Inserindo registro no livro caixa.
-        
-        self::create([
-           "Date_Cash_Book" => date("Y-m-d"),
-           "Note_Cash_Book" => $description,
-           "Type_Cash_Book" => $typeInput,
-           "Value_Cash_Book" => $value,
-           "Id_User" => Auth::user()->id,
-           "Id_Cash" => $cash,
-           "Id_Client" => $idClient
-        ]);
 
     }
     public static function saleParttern(int $idClient,array $products, float $discount, float $pay)

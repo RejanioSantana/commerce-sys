@@ -20,9 +20,11 @@ class ProductController extends Controller
         if ($request->input('s')) {
 
             $data = Product::where('Name_Product',"like","%{$request->input('s')}%")
+                    ->where('Id_Company',Auth::user()->Id_Company)
                     ->paginate(10);
         }else{
-            $data = Product::paginate(10);
+            $data = Product::where('Id_Company',Auth::user()->Id_Company)
+                    ->paginate(10);
         }
 
         return view("stock/index",["title" =>'Lista de Produto','data'=> $data]);
@@ -45,13 +47,13 @@ class ProductController extends Controller
                 "cod"=> "",
                 "ncm"=> "required|numeric",
                 "name"=> "required",
-                "amount"=> "numeric|max:10",
-                "min-amount"=> "numeric|max:10",
-                "pucharse-value"=> "required|max:11",
-                "sale-value"=> "required|max:11",
-                "unit"=> "required|max:20",
-                "category"=> "required|max:20",
-                "note"=> "max:255",
+                "amount"=> "numeric",
+                "min-amount"=> "numeric",
+                "pucharse-value"=> "required",
+                "sale-value"=> "required",
+                "unit"=> "required",
+                "category"=> "required",
+                "note"=> "",
             ]);
             
 
@@ -137,52 +139,87 @@ class ProductController extends Controller
     }
     public function update(Request $request)
     {  
-        $validated = $request
-         ->validate([
-             "cod"=> "required|max:20",
-             "name"=> "required|max:50",
-             "amount"=> "required|max:10",
-             "min-amount"=> "required|max:10",
-             "pucharse-value"=> "required|max:11",
-             "sale-value"=> "required|max:11",
-             "unit"=> "required|max:20",
-             "category"=> "required|max:20",
-             "note"=> "max:255",
-         ]);
+        try {
             
-            $cod = intval($validated["cod"]);
-            $amount = intval($validated["amount"]);
-            $unit = intval($validated["unit"]);
-            $category = intval($validated["category"]);
-            $minAmount = intval($validated["min-amount"]);
-            $pucharseValue = floatval($validated["pucharse-value"]);
-            $saleValue = floatval($validated["sale-value"]);
+        $cod = null;
+        $amount = null;
+        $min = null;
 
-            $statusProduct = Product::where("Cod_Product",$cod)->count();
-            if($statusProduct){
-                Product::where("Cod_Product",$cod)->update([
-                    "Name_Product"=> strtoupper($validated["name"]),
-                    "Amount_Product"=> $amount,
-                    "Min_Amount"=> $minAmount,
-                    "Purchase_Value"=> $pucharseValue,
-                    "Sale_Value"=> $saleValue,
-                    "Note_Product"=> $request["note"],
-                    "Id_Unit_Type"=> $unit,
-                    "Id_Product_Category"=> $category,
-                ]);
+        $validated = $request->validate([
+            "idP" => "",
+            "ncm"=> "required|numeric",
+            "name"=> "required",
+            "amount"=> "numeric",
+            "min-amount"=> "numeric",
+            "pucharse-value"=> "required",
+            "sale-value"=> "required",
+            "unit"=> "required",
+            "category"=> "required",
+            "note"=> "",
+        ]);
+        
+
+        
+        switch(strlen($validated["amount"])){
+            case 0: 
+                $amount = 0;
+            default:
+                $amount = intval($validated["amount"]);
                 
-                return redirect('/product')->with("success","Produto atualizado com sucesso.");
-            };
-            dd("Não Atualizou");
-            return redirect('/product')->with("error","Error interno, produto NÃO atualizado, informe ao desenvolvedor.");
+        }
+        switch(strlen($validated["min-amount"])){
+            case 0: 
+                $min = 0;
+            default:
+                $min = intval($validated["min-amount"]);
+                
+        }
+        $data = [ 
+            "id" => intval($validated["idP"]),
+            "cod" => $cod,
+            "name" => strtoupper($validated["name"]),
+            "ncm" => intval($validated["ncm"]),
+            "amount" => $amount,
+            "minAmount" => $min,
+            "unit" => intval($validated["unit"]),
+            "category" => intval($validated["category"]),
+            "pucharseValue" => floatval($validated["pucharse-value"]),
+            "saleValue" => floatval($validated["sale-value"]),
+            "note" => $request['note'],
+            
+        ];
 
+        $statusProduct = Product::where("id",$data['id'])
+        ->where('Id_Company',Auth::user()->Id_Company)->count();
+        if($statusProduct){
+            Product::where("id",$data['id'])->update([
+                "Name_Product"=> $data['name'],
+                "Ncm"=> $data['ncm'],
+                "Amount_Product"=> $data['amount'],
+                "Min_Amount"=> $data['minAmount'],
+                "Purchase_Value"=> $data['pucharseValue'],
+                "Sale_Value"=> $data['saleValue'],
+                "Note_Product"=> $data['note'],
+                "Id_Unit_Type"=> $data['unit'],
+                "Id_Product_Category"=> $data['category'],
+            ]);
+            
+            return redirect('/product')->with("success","Produto atualizado com sucesso.");
+        };
+        return redirect('/product')->with("error","Error interno, produto NÃO atualizado, informe ao desenvolvedor.");
+
+        } catch (\Throwable $th) {
+            dd($th->getMessage());
+        }
     }
     public function edit(Request $id)
     {
         $id = $id->input('id');
         $unit = DB::table("Unit_Type")->get();
-        $category = DB::table("Product_Category")->get();
-        $data = Product::where("Cod_Product", $id)->first();
+        $category = DB::table("Product_Category")
+                    ->where('Id_Company',Auth::user()->Id_Company)->get();
+        $data = Product::where("id", $id)
+                ->where('Id_Company',Auth::user()->Id_Company)->first();
         
         return view("stock/productupdate",["title" =>'Atualizar Produto', "data" => $data,"category"=> $category,"unit"=> $unit]);
 
