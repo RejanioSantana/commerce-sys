@@ -178,7 +178,6 @@
             .then(data => {
                     selectClient.innerHTML = '<option value="">Selecione um cliente</option>';
                     data.data.forEach(cliente => {
-                        console.log(cliente);
                         if(cliente.id === 1){
                             return;
                         }
@@ -240,40 +239,107 @@
             let carrinho = document.getElementById("carrinho");
             let linhas = carrinho.getElementsByTagName("tr");
             let encontrado = false;
+            let dadosCarrinho = [];
 
+            // Percorre as linhas para verificar se o produto já existe no carrinho
             for (let i = 0; i < linhas.length; i++) {
                 let celulas = linhas[i].getElementsByTagName("td");
-                if (celulas[1].innerText === produto.Name_Product) { 
+                
+                let  inputp = celulas[3].children[0].name;
+                let  idc = inputp.match(/\d+/)[0];
+                let nomeProduto = celulas[1].innerText;
+                let valorProduto = parseFloat(celulas[2].innerText.replace("R$ ", ""));
+                let quantidadeProduto = parseInt(celulas[3].getElementsByTagName("input")[0].value);
+                
+                if (nomeProduto === produto.Name_Product) { 
                     // Produto já existe no carrinho, aumentar quantidade
-                    let inputQuantidade = celulas[3].getElementsByTagName("input")[0];
-                    let novaQuantidade = parseInt(inputQuantidade.value) + 1;
-                    inputQuantidade.value = novaQuantidade;
+                    quantidadeProduto += 1;
+                    celulas[3].getElementsByTagName("input")[0].value = quantidadeProduto;
 
                     // Atualizar subtotal
-                    let novoSubtotal = novaQuantidade * parseFloat(produto.Sale_Value);
-                    celulas[4].innerText = `R$ ${novoSubtotal}`;
+                    let novoSubtotal = quantidadeProduto * valorProduto;
+                    celulas[4].innerText = `R$ ${novoSubtotal.toFixed(2)}`;
 
                     encontrado = true;
-                    break;
                 }
+                
+                // Salva os dados existentes
+                dadosCarrinho.push({
+                    id: idc,
+                    codigo: celulas[0].innerText,
+                    nome: nomeProduto,
+                    preco: valorProduto,
+                    quantidade: quantidadeProduto,
+                    subtotal: quantidadeProduto * valorProduto
+                });
             }
 
             if (!encontrado) {
-                // Produto não encontrado, adiciona nova linha
-                let subtotal = parseFloat(produto.Sale_Value) * parseInt(quantidade);
+                // Adiciona o novo produto ao array antes de recriar a tabela
+                dadosCarrinho.push({
+                    id: produto.id,
+                    codigo: produto.Cod_Product,
+                    nome: produto.Name_Product,
+                    preco: parseFloat(produto.Sale_Value),
+                    quantidade: quantidade,
+                    subtotal: parseFloat(produto.Sale_Value) * quantidade
+                });
+            }
+
+            // Limpa a tabela e recria as linhas com os dados armazenados
+            carrinho.innerHTML = "";
+            dadosCarrinho.forEach(item => {
                 let row = `<tr>
-                                <td>${produto.Cod_Product}</td>
-                                <td>${produto.Name_Product}</td>
-                                <td>R$ ${produto.Sale_Value}</td>
-                                <td><input type="number" name="product[${produto.id}]" value="${quantidade}" min="1" onchange="atualizarQuantidade(this, ${produto.Sale_Value})"></td>
-                                <td>R$ ${subtotal}</td>
+                                <td>${item.codigo}</td>
+                                <td>${item.nome}</td>
+                                <td>R$ ${item.preco.toFixed(2)}</td>
+                                <td><input type="number" name="product[${item.id}]" value="${item.quantidade}" min="1" onchange="atualizarQuantidade(this, ${item.preco})"></td>
+                                <td>R$ ${item.subtotal.toFixed(2)}</td>
                                 <td><button class='btn btn-danger btn-sm' onclick='removerProduto(this)'>Remover</button></td>
                             </tr>`;
                 carrinho.innerHTML += row;
-            }
+            });
 
             atualizarTotal();
             limparPesquisa();
+            // let quantidade = 1;
+            // let carrinho = document.getElementById("carrinho");
+            // let linhas = carrinho.getElementsByTagName("tr");
+            // let encontrado = false;
+
+            // for (let i = 0; i < linhas.length; i++) {
+            //     let celulas = linhas[i].getElementsByTagName("td");
+            //     if (celulas[1].innerText === produto.Name_Product) { 
+            //         // Produto já existe no carrinho, aumentar quantidade
+            //         let inputQuantidade = celulas[3].getElementsByTagName("input")[0];
+            //         let novaQuantidade = parseInt(inputQuantidade.value) + 1;
+            //         inputQuantidade.value = novaQuantidade;
+
+            //         // Atualizar subtotal
+            //         let novoSubtotal = novaQuantidade * parseFloat(produto.Sale_Value);
+            //         celulas[4].innerText = `R$ ${novoSubtotal}`;
+
+            //         encontrado = true;
+            //         break;
+            //     }
+            // }
+
+            // if (!encontrado) {
+            //     // Produto não encontrado, adiciona nova linha
+            //     let subtotal = parseFloat(produto.Sale_Value) * parseInt(quantidade);
+            //     let row = `<tr>
+            //                     <td>${produto.Cod_Product}</td>
+            //                     <td>${produto.Name_Product}</td>
+            //                     <td>R$ ${produto.Sale_Value}</td>
+            //                     <td><input type="number" name="product[${produto.id}]" value="${quantidade}" min="1" onchange="atualizarQuantidade(this, ${produto.Sale_Value})"></td>
+            //                     <td>R$ ${subtotal}</td>
+            //                     <td><button class='btn btn-danger btn-sm' onclick='removerProduto(this)'>Remover</button></td>
+            //                 </tr>`;
+            //     carrinho.innerHTML += row;
+            // }
+
+            // atualizarTotal();
+            // limparPesquisa();
         }
 
         function limparPesquisa()

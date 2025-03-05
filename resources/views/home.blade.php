@@ -46,7 +46,7 @@
                                 <h5>Caixa Anterior</h5>
                             </div>
                             <div class="ibox-content">
-                                <h1 class="no-margins">{{ $data['balanceBefore'] }}</h1>
+                                <h1 class="no-margins">{{number_format($data['balanceBefore'], 2, ',', '.')  }}</h1>
                                 <!-- <div class="stat-percent font-bold text-navy">20% <i class="fa fa-level-up"></i></div> -->
                                 <!-- <small>New orders</small> -->
                             </div>
@@ -59,7 +59,7 @@
                                 <h5>Despesa</h5>
                             </div>
                             <div class="ibox-content">
-                                <h1 class="no-margins">{{ $data['expense'] }}</h1>
+                                <h1 class="no-margins">{{ number_format($data['expense'], 2, ',', '.')  }}</h1>
                                 <!-- <div class="stat-percent font-bold text-navy">20% <i class="fa fa-level-up"></i></div> -->
                                 <!-- <small>New orders</small> -->
                             </div>
@@ -72,7 +72,7 @@
                                 <h5>Receita</h5>
                             </div>
                             <div class="ibox-content">
-                                <h1 class="no-margins">{{ $data['revenue'] }}</h1>
+                                <h1 class="no-margins">{{ number_format($data['revenue'], 2, ',', '.')  }}</h1>
                                 <!-- <div class="stat-percent font-bold text-navy">20% <i class="fa fa-level-up"></i></div> -->
                                 <!-- <small>New orders</small> -->
                             </div>
@@ -85,7 +85,7 @@
                                 <h5>Caixa</h5>
                             </div>
                             <div class="ibox-content">
-                                <h1 class="no-margins">{{ $data['currentCash'] }}</h1>
+                                <h1 class="no-margins">{{number_format($data['currentCash'], 2, ',', '.')  }}</h1>
                                 <!-- <div class="stat-percent font-bold text-navy">20% <i class="fa fa-level-up"></i></div> -->
                                 <!-- <small>New orders</small> -->
                             </div>

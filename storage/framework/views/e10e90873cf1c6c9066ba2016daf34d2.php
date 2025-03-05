@@ -32,28 +32,27 @@
                     <ul class="nav nav-second-level collapse">
                         <li><a href="<?php echo e(route('product')); ?>">Produtos</a></li>
                         <li><a href="<?php echo e(route('product.create')); ?>">Novo Produto</a></li>
-                        <li><a href="#">Devolução</a></li>
-                        <li><a href="#">Status</a></li>
-                        <li><a href="#">Relatorio</a></li>
+                        <!-- <li><a href="#">Devolução</a></li> -->
+                        <!-- <li><a href="#">Status</a></li> -->
+                        <!-- <li><a href="#">Relatorio</a></li> -->
                         <li><a href="<?php echo e(route('category')); ?>">Categorias</a></li>
-                        <li><a href="<?php echo e(route('unit')); ?>">Unidades</a></li>
                     </ul>
                 </li>
 
-                <li>
+                <!-- <li>
                     <a ><i class="fa fa-circle-o"></i> <span class="nav-label">Cliente</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li><a href="<?php echo e(route('client.create')); ?>">Novo Cliente</a></li>
                         <li><a href="<?php echo e(route('client.index')); ?>">Todos os Cliente</a></li>
                    
                     </ul>
-                </li>
+                </li> -->
                 <li>
                     <a><i class="fa fa-circle-o"></i> <span class="nav-label">Caixa</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li><a href="<?php echo e(route('cash.index')); ?>">Livro Caixa</a></li>
                         <li><a href="<?php echo e(route('cash.create')); ?>">Lançar Receita/Despesa</a></li>
-                        <li><a href="#">Gráficos</a></li>
+                        <!-- <li><a href="#">Gráficos</a></li> -->
                    
                     </ul>
                 </li>

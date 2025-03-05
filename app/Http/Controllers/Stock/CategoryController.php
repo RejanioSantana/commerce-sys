@@ -36,9 +36,10 @@ class CategoryController extends Controller
         $validated = $request->validate([
             "name"=> "required|max:20",
         ]);
+        $name = strtoupper($validated["name"]);
         try {
             DB::table("Product_Category")->insert([
-                "Name_Product_Category"=> $validated["name"],
+                "Name_Product_Category"=> $name,
                 "Id_Company"=> Auth::user()->Id_Company,
             ]);
             return redirect()->back();

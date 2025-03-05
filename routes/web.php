@@ -27,10 +27,7 @@ Route::middleware('auth')->group(function(){
     Route::post('/product/update', [ProductController::class,'update'])->name('product.update');
     Route::get('/product/edit', [ProductController::class,'edit'])->name('product.edit');
     Route::post('/product/search-code', [ProductController::class,'sCode'])->name('product.scode');
-    // Unit of Product.
-    Route::get('/unit', [UnitController::class,'index'])->name('unit');
-    Route::post('/unit', [UnitController::class,'store'])->name('unit');
-    Route::get('/unit/destroy/{id}', [UnitController::class,'destroy'])->name('unit.destroy');
+    
     // Category of Product.
     Route::get('/category', [CategoryController::class,'index'])->name('category');
     Route::post('/category', [CategoryController::class,'store'])->name('category');
