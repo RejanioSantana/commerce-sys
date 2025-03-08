@@ -14,6 +14,7 @@ class Company extends Model
             'Phone',
             'IE',
             'ICMS',
+            'Nfe',
     ];
 
 }

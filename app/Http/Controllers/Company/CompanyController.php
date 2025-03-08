@@ -16,9 +16,7 @@ class CompanyController extends Controller
      */
     public function index()
     {
-    //    $xml = NFCE::emitirNFE();
-    //    $xmlAssinado = NFCE::assinarXML($xml);
-    //    NFCE::sendSefaz($xmlAssinado);
+    
         $c = User::select('Id_Company')->where('id',Auth::user()->id)->first();
         $c = Company::where('id',$c->Id_Company)->first();
         return view('company/index',["title"=>"Perfil Empresa", "data" => $c]);
@@ -39,7 +37,6 @@ class CompanyController extends Controller
     {
         try {
             $r = $request->validate([
-                'id' => 'required',
                 'name' => 'required',
                 'name_fantasy' => 'required',
                 'cnpj' => 'required',
@@ -54,13 +51,15 @@ class CompanyController extends Controller
             $phone = intval($r['phone']);
             $ie =  intval($r['ie']);
             $icms =  floatval($r['icms']);
-            $reponse = Company::where('id', $r['id'])->update([
+            $nfe = ($request['nfce'] == 'on')? 1 : 0;
+            $reponse = Company::where('id', Auth::user()->Id_Company)->update([
                 'Name_Company' => $name,
                 'Name_Fantasy' => $fantasy,
                 'Cnpj' => $cnpj,
                 'Phone' => $phone,
                 'IE' => $ie,
                 'ICMS' => $icms,
+                'Nfe' => $nfe,
             ]);
             if($reponse){
                 return redirect()->back()->with('success','Dados atualizados.');
@@ -68,6 +67,7 @@ class CompanyController extends Controller
             return redirect()->back()->with('error','Dados não atualizados.');
 
         } catch (\Throwable $th) {
+            dd($th->getMessage());
             return redirect()->back()->with('error','Dados não atualizados.');
         }
 

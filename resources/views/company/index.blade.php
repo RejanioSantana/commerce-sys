@@ -12,7 +12,7 @@
             <div class="ibox-content" >
             <form role="form" class="form-horizontal" name="formulario" method="post" action="{{ route('company.store') }}">
             @csrf
-            <input type="hidden" name="id" value="{{ $data->id }}">
+            
             <div class="form-group">
                 <label class="col-sm-6">
                     <label>Nome Comercial</label>
@@ -57,7 +57,37 @@
                 </label>
             
             </div>
+            <!--  -->
 
+            <div class="ibox float-e-margins">
+                        
+                        <div class="ibox-content">
+                            <h4>
+                                Emitir Nota Fiscal (NFCE)?
+                            </h4>
+                            <p>
+                                Se ativado esta opção, o sistema tentará Emitir nfc-e através do SEFAZ-Ba.
+                            </p>
+                            <div class="switch">
+                                <div class="onoffswitch">
+                                    @if($data->Nfe == 1)
+                                        <input type="checkbox" name="nfce" checked class="onoffswitch-checkbox" id="example1">
+                                        @else
+                                        <input type="checkbox" name="nfce" class="onoffswitch-checkbox" id="example1">
+                                    @endif
+                                    <label class="onoffswitch-label" for="example1">
+                                        <span class="onoffswitch-inner"></span>
+                                        <span class="onoffswitch-switch"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                           
+
+                        </div>
+                    </div>
+
+            <!--  -->
             <div class="hr-line-dashed"></div>
 
             <div class="form-group">

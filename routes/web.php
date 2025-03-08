@@ -40,6 +40,7 @@ Route::middleware('auth')->group(function(){
     Route::resource('/sale', SaleController::class);
     Route::post('sale/search',[Search::class,'search'])->name('sale.search');
     Route::get('/search/client',[Search::class,'client'])->name('search.client');
+    Route::post('sale/result',[Search::class,'result'])->name('sale.result');
     //Company
     Route::resource('/company',CompanyController::class);
 

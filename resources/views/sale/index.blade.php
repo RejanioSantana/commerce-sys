@@ -13,8 +13,8 @@
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> -->
     <style>
         body {
-            background-color: #6a0dad;
-            color: white;
+            background-color: #2f4050;
+            color: #ffffff;
             margin: 0;
             padding: 0;
             display: flex;
@@ -144,7 +144,7 @@
             document.addEventListener("keydown", function(event) {
                 if (event.key === "F8") {
                     event.preventDefault();
-                    aplicarDesconto();
+                    // aplicarDesconto();
                 }
                 if (event.key === "Escape") {
                     sairModoTelaCheia();

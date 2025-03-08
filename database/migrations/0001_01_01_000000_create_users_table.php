@@ -20,6 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('Phone');
             $table->unsignedBigInteger('IE');
             $table->decimal('ICMS',6,2);
+            $table->boolean('Nfe');
             $table->timestamps();
         });
         Schema::create('users', function (Blueprint $table) {

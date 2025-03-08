@@ -33,7 +33,7 @@
                         <li><a href="<?php echo e(route('product')); ?>">Produtos</a></li>
                         <li><a href="<?php echo e(route('product.create')); ?>">Novo Produto</a></li>
                         <!-- <li><a href="#">Devolução</a></li> -->
-                        <!-- <li><a href="#">Status</a></li> -->
+                        <!-- <li><a href="#">Status</a></li>  -->
                         <!-- <li><a href="#">Relatorio</a></li> -->
                         <li><a href="<?php echo e(route('category')); ?>">Categorias</a></li>
                     </ul>

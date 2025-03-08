@@ -33,7 +33,7 @@
                         <li><a href="{{route('product')}}">Produtos</a></li>
                         <li><a href="{{route('product.create')}}">Novo Produto</a></li>
                         <!-- <li><a href="#">Devolução</a></li> -->
-                        <!-- <li><a href="#">Status</a></li> -->
+                        <!-- <li><a href="#">Status</a></li>  -->
                         <!-- <li><a href="#">Relatorio</a></li> -->
                         <li><a href="{{route('category')}}">Categorias</a></li>
                     </ul>
